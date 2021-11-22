@@ -1,0 +1,55 @@
+<div class="content-wrapper">
+      <form action="/api/users/signin" method="post">
+           <div class="container">
+                <div class="row g-3">
+
+                    <div class="col-12">
+                      <label for="" class="form-label">Email</label>
+                      <input type="email" class="form-control" name="email" >
+                  </div>
+      
+                  <div class="col-12">
+                      <label for="" class="form-label">Password</label>
+                      <input type="text" class="form-control" name="password" >
+                  </div>
+      
+                  
+                </div>
+           </div>
+
+            <div class="container mt-4">
+                    <div class="row">
+                        <div class="col-2">
+                            <a href="/" class="btn btn-secondary"> Cancel</a>
+                        </div>
+    
+                        <div class="col-2">
+                            <button type="submit" class="btn btn-success"> Sign in</button>
+                        </div>
+                    </div>
+            </div>
+
+      </form>
+</div>
+
+<script>
+    const form  = document.querySelector('form');
+    form.addEventListener('submit' , async (e)=>{
+        e.preventDefault();
+        //get the values
+             const email = form.email.value;
+            const password = form.password.value
+        try{
+            const res = await fetch('/signin' ,{
+                method:'POST' ,
+                body:JSON.stringify({email , password}),
+                headers:{'Content-type':'application/json'}
+            })
+          
+        }
+
+        catch{
+                console.log("Something went wrong");
+        }
+    })
+</script>

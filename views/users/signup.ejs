@@ -1,0 +1,75 @@
+<div class="content-wrapper">
+
+    <div class="container">
+        <% if(locals.errorMessage) { %>
+            <%- include('../partials/errorMessage') %>
+                <% } %>
+    </div>
+
+    <form action="/api/users/signup" method="post">
+        <div class="container">
+            <div class="row g-3">
+                <div class="col-12">
+                    <label for="" class="form-label">Username</label>
+                    <input type="text" class="form-control username" name="username">
+                </div>
+
+                <div class="col-12">
+                    <label for="" class="form-label">Email</label>
+                    <input type="email" class="form-control email" name="email">
+                </div>
+
+                <div class="col-12">
+                    <label for="" class="form-label">Password</label>
+                    <input type="text" class="form-control password" name="password">
+                </div>
+
+            </div>
+        </div>
+        <div class="container mt-4">
+            <div class="row">
+                <div class="col-2">
+                    <a href="/" class="btn btn-secondary"> Cancel</a>
+                </div>
+
+                <div class="col-2">
+                    <button type="submit" class="btn btn-success"> Sign up</button>
+                </div>
+            </div>
+        </div>
+
+    </form>
+
+</div>
+
+<script>
+    const form = document.querySelector('form');
+    const emailError = document.querySelector('.email');
+    const passwordError = document.querySelector('.password');
+    const usernameError = document.querySelector('.username');
+
+      usernameError.textContent = "Xatolik";
+    form.addEventListener('submit', async(e) => {
+        e.preventDefault();
+
+        const username = form.username.value;
+        const email = form.email.value;
+        const password = form.password.value
+        try {
+
+            const result = await fetch('/api/users/signup' ,{
+                method:'POST',
+                body:JSON.stringify({email , username , password}),
+                headers:{'Content-type':'application/json'}
+            })
+
+            const data = result.json();
+            console.log(data);
+        }
+
+        catch {
+               console.log("Xatolik");
+        }
+
+    })
+</script>
